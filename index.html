@@ -8,10 +8,14 @@ description: Twelve hand-built browser games — Snake, Tetris, 2048, Breakout, 
 <section class="hero">
   <div class="wrap">
     <p class="hero-eyebrow"><span class="dot"></span> {{ games | size }} games · free · open source</p>
-    <h1>Press start.<br><span class="grad">That's the whole setup.</span></h1>
+    <h1>Press start.<br><span class="mark">That's the whole setup.</span></h1>
     <p class="lede">
       A small arcade of games written by hand in plain JavaScript. No installs, no
       accounts, no downloads — click a game and you're playing in about a second.
+    </p>
+    <p class="hero-actions">
+      <a class="btn btn-primary btn-hero" href="#arcade">▶ Start playing</a>
+      <a class="btn btn-ghost btn-hero" href="https://github.com/{{ site.repository }}" rel="noopener">View the source</a>
     </p>
     <dl class="hero-stats">
       <div><dt>Games</dt><dd>{{ games | size }}</dd></div>
@@ -21,6 +25,16 @@ description: Twelve hand-built browser games — Snake, Tetris, 2048, Breakout, 
     </dl>
   </div>
 </section>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    {%- for i in (1..2) -%}
+      {%- for g in games -%}
+        <span class="ticker-item"><span class="t">{{ g.icon }} {{ g.title }}</span><span class="dot">✦</span></span>
+      {%- endfor -%}
+    {%- endfor -%}
+  </div>
+</div>
 
 <section class="toolbar">
   <div class="wrap toolbar-inner">

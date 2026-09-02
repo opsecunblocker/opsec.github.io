@@ -7,6 +7,10 @@ A free, open-source arcade of browser games published with GitHub Pages.
 Twelve games, all hand-written in plain JavaScript. No frameworks, no build step,
 no trackers, no network calls — click a game and it plays.
 
+The site is styled as a bright, chunky retro arcade: warm paper, hard ink borders,
+offset shadows and a scrolling marquee up top. Each game itself renders inside a
+dark "cabinet" screen so it keeps its own art direction.
+
 | | | |
 | --- | --- | --- |
 | 🐍 **Snake** | 🔢 **2048** | 🧱 **Breakout** |
