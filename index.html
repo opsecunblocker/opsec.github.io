@@ -1,0 +1,84 @@
+---
+layout: default
+description: Twelve hand-built browser games — Snake, Tetris, 2048, Breakout, Pong and more. Free, open source, no installs.
+---
+{%- assign games = site.games | sort: 'order' -%}
+{%- assign cats = 'Arcade|Puzzle|Casual' | split: '|' -%}
+
+<section class="hero">
+  <div class="wrap">
+    <p class="hero-eyebrow"><span class="dot"></span> {{ games | size }} games · free · open source</p>
+    <h1>Press start.<br><span class="grad">That's the whole setup.</span></h1>
+    <p class="lede">
+      A small arcade of games written by hand in plain JavaScript. No installs, no
+      accounts, no downloads — click a game and you're playing in about a second.
+    </p>
+    <dl class="hero-stats">
+      <div><dt>Games</dt><dd>{{ games | size }}</dd></div>
+      <div><dt>Download size</dt><dd>0 MB</dd></div>
+      <div><dt>Trackers</dt><dd>0</dd></div>
+      <div><dt>Price</dt><dd>Free</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="toolbar">
+  <div class="wrap toolbar-inner">
+    <div class="search">
+      <input id="game-search" type="search" placeholder="Search games…" autocomplete="off"
+             aria-label="Search games" data-search>
+      <span class="icon" aria-hidden="true">
+        <svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6">
+          <circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <kbd>/</kbd>
+    </div>
+
+    <div class="chips" role="group" aria-label="Filter games by category">
+      <button class="chip" type="button" data-filter="all" aria-pressed="true">All<span class="count"></span></button>
+      {%- for cat in cats -%}
+      <button class="chip" type="button" data-filter="{{ cat | downcase }}" aria-pressed="false">{{ cat }}<span class="count"></span></button>
+      {%- endfor -%}
+    </div>
+
+    <button class="btn-random" type="button" data-random>
+      <span aria-hidden="true">🎲</span> Surprise me
+    </button>
+  </div>
+</section>
+
+<div class="wrap">
+
+  <section class="section" id="continue" data-continue hidden>
+    <div class="section-head">
+      <h2>Pick up where you left off</h2>
+      <p><button class="btn btn-ghost" type="button" data-clear-recents>Clear</button></p>
+    </div>
+    <div class="recents" data-recents></div>
+  </section>
+
+  <div class="empty" data-empty hidden>
+    <strong>No games match that.</strong>
+    Try a shorter search, or hit “Surprise me” and let fate decide.
+  </div>
+
+  {%- for cat in cats -%}
+    {%- assign list = games | where: 'category', cat -%}
+    {%- assign n = list | size -%}
+    {%- if n > 0 -%}
+  <section class="section" data-cat="{{ cat | downcase }}" id="{{ cat | downcase }}">
+    <div class="section-head">
+      <h2>{{ cat }}</h2>
+      <p>{% if n == 1 %}1 game{% else %}{{ n }} games{% endif %}</p>
+    </div>
+    <div class="grid">
+      {%- for g in list -%}
+        {% include game-card.html game=g %}
+      {%- endfor -%}
+    </div>
+  </section>
+    {%- endif -%}
+  {%- endfor -%}
+
+</div>

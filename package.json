@@ -1,0 +1,17 @@
+{
+  "name": "opsec-arcade",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Local preview tooling for the OPSEC Arcade Jekyll site. GitHub Pages builds the real site with Jekyll; this is only used to render a live preview in development.",
+  "scripts": {
+    "build": "node tools/build.js --out _site --baseurl \"\"",
+    "watch": "node tools/watch.js",
+    "serve": "python3 -m http.server 4000 --bind 0.0.0.0 --directory _site"
+  },
+  "devDependencies": {
+    "js-yaml": "^4.1.0",
+    "jsdom": "^30.0.1",
+    "liquidjs": "^10.21.0",
+    "markdown-it": "^14.1.0"
+  }
+}

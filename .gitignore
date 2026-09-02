@@ -1,0 +1,14 @@
+# GitHub Pages / Jekyll build output
+_site/
+.jekyll-cache/
+.jekyll-metadata
+
+# Local preview tooling — the folder itself is committed (see README),
+# but GitHub Pages is told to exclude it in _config.yml.
+node_modules/
+package-lock.json
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp

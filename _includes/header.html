@@ -1,0 +1,29 @@
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="{{ '/' | relative_url }}">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="22" height="22" focusable="false">
+          <rect x="1.5" y="1.5" width="29" height="29" rx="8" fill="none" stroke="currentColor" stroke-width="2" opacity=".35"/>
+          <path d="M13 10.5 22 16l-9 5.5z" fill="currentColor"/>
+        </svg>
+      </span>
+      <span class="brand-text">
+        <strong>{{ site.title }}</strong>
+        <em>opsec.github.io</em>
+      </span>
+    </a>
+
+    <nav class="site-nav" id="site-nav" aria-label="Primary">
+      <a href="{{ '/' | relative_url }}">All games</a>
+      <a href="{{ '/' | relative_url }}#arcade">Arcade</a>
+      <a href="{{ '/' | relative_url }}#puzzle">Puzzle</a>
+      <a href="{{ '/' | relative_url }}#casual">Casual</a>
+      <a class="nav-cta" href="https://github.com/{{ site.repository }}" rel="noopener">GitHub</a>
+    </nav>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" hidden>
+      <span class="sr-only">Menu</span>
+      <span aria-hidden="true">≡</span>
+    </button>
+  </div>
+</header>
