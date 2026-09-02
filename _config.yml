@@ -1,0 +1,60 @@
+# ---------------------------------------------------------------------------
+# OPSEC Arcade — site configuration
+# Built by GitHub Pages with Jekyll. No plugins required.
+# ---------------------------------------------------------------------------
+
+title:        OPSEC Arcade
+tagline:      Free browser games. No installs, no sign-ups, no excuses.
+description: >
+  A small, hand-built arcade of browser games. Snake, Tetris, 2048,
+  Breakout and more — playable straight from the keyboard, free and
+  open source.
+author:       opsecunblocker
+
+# GitHub Pages publishes this project at /opsec.github.io/ — baseurl matters.
+url:          "https://opsecunblocker.github.io"
+baseurl:      "/opsec.github.io"
+
+github_username: opsecunblocker
+repository:      opsecunblocker/opsec.github.io
+
+# ---------------------------------------------------------------------------
+# Collections
+# Every file in _games/ becomes a playable page at /games/<filename>/
+# ---------------------------------------------------------------------------
+collections:
+  games:
+    output: true
+    permalink: /games/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: games
+    values:
+      layout: game
+
+# ---------------------------------------------------------------------------
+# Build
+# ---------------------------------------------------------------------------
+markdown: kramdown
+kramdown:
+  input:         GFM
+  hard_wrap:     false
+  syntax_highlighter: rouge
+
+# Files GitHub Pages should not publish.
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - package.json
+  - package-lock.json
+  - tools
+  - node_modules
+  - vendor
+  - README.md
+  - CONTRIBUTING.md
+  - .gitignore
+
+include:
+  - assets

@@ -1,0 +1,123 @@
+---
+layout: default
+---
+{%- assign pool = site.games | sort: 'order' -%}
+{%- assign accent = page.accent | default: '#67e8f9' -%}
+{%- assign hudspec = page.hud | default: 'Score=score,Best=best' | split: ',' -%}
+<div class="wrap game-page" style="--accent: {{ accent }}">
+
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <a href="{{ '/' | relative_url }}">Arcade</a>
+    <span class="sep" aria-hidden="true">/</span>
+    <span>{{ page.category | capitalize }}</span>
+    <span class="sep" aria-hidden="true">/</span>
+    <span>{{ page.title }}</span>
+  </nav>
+
+  <header class="game-head">
+    <div class="game-icon" aria-hidden="true">{{ page.icon }}</div>
+    <div class="game-head-text">
+      <h1>{{ page.title }}</h1>
+      <p class="tagline">{{ page.tagline }}</p>
+      <div class="game-meta">
+        <span class="pill accent">{{ page.category }}</span>
+        <span class="pill">{{ page.difficulty | default: 'Easy' }}</span>
+        <span class="pill">{{ page.players | default: '1 player' }}</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="game-shell" data-shell
+       data-slug="{{ page.slug }}"
+       data-title="{{ page.title }}"
+       data-icon="{{ page.icon }}"
+       data-accent="{{ accent }}">
+    <div class="game-hud">
+      <div class="hud-stats">
+        {%- for h in hudspec -%}
+          {%- assign kv = h | split: '=' -%}
+          {%- assign key = kv[1] | default: kv[0] | strip | downcase -%}
+          {%- assign label = kv[0] | strip -%}
+        <div class="hud-stat{% if key == 'score' %} is-accent{% endif %}">
+          <span class="k">{{ label }}</span>
+          <span class="v" data-hud="{{ key }}">—</span>
+        </div>
+        {%- endfor -%}
+      </div>
+      <div class="hud-actions">
+        <button class="btn btn-ghost" type="button" data-action="restart">Restart</button>
+        <button class="btn btn-ghost" type="button" data-action="pause">Pause</button>
+        <button class="btn btn-ghost" type="button" data-action="fullscreen">Fullscreen</button>
+      </div>
+    </div>
+
+    <div class="game-stage" data-stage>
+      <div class="game-overlay" data-overlay>
+        <div class="overlay-card">
+          <p class="kicker" data-overlay-kicker>Ready</p>
+          <h2 data-overlay-title>{{ page.title }}</h2>
+          <p data-overlay-text>{{ page.tagline }}</p>
+          <button class="btn btn-primary" type="button" data-overlay-action>Play</button>
+          <p class="hint" data-overlay-hint>Press space to start</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="game-controls">
+      <div class="keys">{{ page.controls }}</div>
+      <span class="note">Best score is saved in this browser only.</span>
+    </div>
+  </div>
+
+  <div class="howto">
+    <div class="howto-body">
+      {{ content }}
+    </div>
+    <aside class="howto-aside">
+      <h3>Game info</h3>
+      <dl>
+        <div>
+          <dt>Category</dt>
+          <dd>{{ page.category | capitalize }}</dd>
+        </div>
+        <div>
+          <dt>Difficulty</dt>
+          <dd>{{ page.difficulty | default: 'Easy' }}</dd>
+        </div>
+        <div>
+          <dt>Players</dt>
+          <dd>{{ page.players | default: '1 player' }}</dd>
+        </div>
+        <div>
+          <dt>Controls</dt>
+          <dd>{{ page.controls }}</dd>
+        </div>
+        <div>
+          <dt>Built with</dt>
+          <dd>Plain JavaScript · no libraries</dd>
+        </div>
+      </dl>
+    </aside>
+  </div>
+
+  <section class="section" id="more">
+    <div class="section-head">
+      <h2>More games</h2>
+      <p><a href="{{ '/' | relative_url }}">See all →</a></p>
+    </div>
+    <div class="grid">
+      {%- assign shown = 0 -%}
+      {%- for g in pool -%}
+        {%- if g.slug != page.slug and g.category == page.category and shown < 3 -%}
+          {% include game-card.html game=g %}{%- assign shown = shown | plus: 1 -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {%- for g in pool -%}
+        {%- if g.slug != page.slug and g.category != page.category and shown < 3 -%}
+          {% include game-card.html game=g %}{%- assign shown = shown | plus: 1 -%}
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </section>
+
+</div>
